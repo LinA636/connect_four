@@ -4,6 +4,9 @@ require "colorize"
 require "matrix"
 
 class ConnectFour
+  # ToDos
+  # does not stop game after victory
+  # does not have different colors for different players
 
   attr_accessor :field_matrix, :current_player, :player1, :player2
 
@@ -21,6 +24,8 @@ class ConnectFour
       make_move
     end
   end
+
+  private
 
   def victory?
     victory_in_row?

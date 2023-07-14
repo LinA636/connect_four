@@ -1,3 +1,5 @@
+require "colorize"
+
 class Field
   attr_accessor :is_set, :symbol
 
