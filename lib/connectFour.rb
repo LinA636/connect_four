@@ -13,5 +13,32 @@ class ConnectFour
     @player2 = Player.new('black')
     @current_player = self.player1
   end
-  
+
+  def start_game
+    while !victory? && moves_left?
+      update_current_player
+      print_board
+      make_move
+    end
+  end
+
+  def victory?
+
+  end
+
+  def moves_left?
+
+  end
+
+  def update_current_player
+
+  end
+
+  def print_board
+
+  end
+
+  def make_move
+
+  end
 end

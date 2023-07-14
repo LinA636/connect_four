@@ -26,4 +26,23 @@ describe ConnectFour do
       expect(game.current_player).to be(game.player1)
     end
   end
+
+  describe '#start_game' do
+    subject(:game_start_game){described_class.new}
+    before do
+      allow(game_start_game).to receive(:victory?).and_return(false, false, false)
+      allow(game_start_game).to receive(:moves_left?).and_return(true, true, false)
+      allow(game_start_game).to receive(:update_current_player)
+      allow(game_start_game).to receive(:print_board)
+      allow(game_start_game).to receive(:make_move)
+    end
+
+    it 'receives #update_current_player, #print_board and #make_move as long no victoryis declared and moves are left' do
+      expect(game_start_game).to receive(:update_current_player).twice
+      expect(game_start_game).to receive(:print_board).twice
+      expect(game_start_game).to receive(:make_move).twice
+      game_start_game.start_game
+    end
+  end
+
 end
