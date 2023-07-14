@@ -98,4 +98,43 @@ describe ConnectFour do
     end
   end
 
+  describe '#choose_column' do
+    subject(:game_choose_column){described_class.new}
+    context 'when valid and non_full column is chosen' do
+      before do
+        allow(game_choose_column).to receive(:gets).and_return("1\n")
+        allow(game_choose_column).to receive(:column_exists?).and_return(true)
+        allow(game_choose_column).to receive(:column_full?).and_return(false)
+      end
+
+      it 'returns chosen coulumn index' do
+        expect(game_choose_column.choose_column).to eq(0)
+      end
+    end
+
+    context 'when valid, but full column is chosen' do
+      before do
+        allow(game_choose_column).to receive(:gets).and_return("1\n", "2\n")
+        allow(game_choose_column).to receive(:column_exists?).and_return(true)
+        allow(game_choose_column).to receive(:column_full?).and_return(true, false)
+      end
+
+      it 'chooses new column until column is valid and not full' do
+        expect(game_choose_column.choose_column).to eq(1)
+      end
+    end
+
+    context 'when invalid column is chosen' do
+      before do
+        allow(game_choose_column).to receive(:gets).and_return("10\n", "2\n")
+        allow(game_choose_column).to receive(:column_exists?).and_return(false, true)
+        allow(game_choose_column).to receive(:column_full?).and_return(false)
+      end
+
+      it 'chooses new column until column is valid and not full' do
+        expect(game_choose_column.choose_column).to eq(1)
+      end
+    end
+  end
+
 end

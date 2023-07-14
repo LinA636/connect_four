@@ -32,7 +32,6 @@ class ConnectFour
       return true
     else
       announce_tie
-      end_game
     end
   end
 
@@ -58,11 +57,19 @@ class ConnectFour
     drop_disc(column_index)
   end
 
+  def choose_column
+    puts 'Choose a column: '
+    column_index = gets.chomp.to_i
+    column_index -= 1
+    if column_exists?(column_index) && !column_full?(column_index)
+      column_index
+    else
+      choose_column()
+    end
+  end
+
   def announce_tie
     puts "There are no more moves left. It's a tie!"
   end
 
-  def end_game
-    #exit
-  end
 end
