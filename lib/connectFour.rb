@@ -68,6 +68,14 @@ class ConnectFour
     end
   end
 
+  def column_exists?(column_index)
+    0 <= column_index && column_index <= 6
+  end
+
+  def column_full?(column_index)
+
+  end
+
   def announce_tie
     puts "There are no more moves left. It's a tie!"
   end

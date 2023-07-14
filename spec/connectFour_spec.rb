@@ -137,4 +137,31 @@ describe ConnectFour do
     end
   end
 
+  describe '#column_exists?' do
+    subject(:game_col_exists){described_class.new}
+    context 'when column index not between 0 and 6' do
+      it 'returns false' do
+        col_index = 7
+        expect(game_col_exists.column_exists?(col_index)).to be false
+      end
+    end
+
+    context 'when column index is between 0 and 6' do
+      it 'returns true when index is 0' do
+        col_index = 0
+        expect(game_col_exists.column_exists?(col_index)).to be true
+      end
+
+      it 'returns true when index is 4' do
+        col_index = 4
+        expect(game_col_exists.column_exists?(col_index)).to be true
+      end
+
+      it 'returns true when index is 6' do
+        col_index = 6
+        expect(game_col_exists.column_exists?(col_index)).to be true
+      end
+    end
+  end
+
 end
