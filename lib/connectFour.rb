@@ -50,7 +50,6 @@ class ConnectFour
     false
   end
 
-
   def victory_in_diagonal?
     number_of_columns = self.field_matrix.column_size
     number_of_rows = self.field_matrix.row_size
@@ -81,6 +80,7 @@ class ConnectFour
       return true
     else
       announce_tie
+      return false
     end
   end
 
@@ -136,8 +136,8 @@ class ConnectFour
     puts "There are no more moves left. It's a tie!"
   end
 
-  def end_game
-    
+  def announce_winner
+    puts "Congratulation! The player with symbol #{current_player.symbol} wins."
   end
 
 end
