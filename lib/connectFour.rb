@@ -54,7 +54,8 @@ class ConnectFour
   end
 
   def make_move
-
+    column_index = choose_column
+    drop_disc(column_index)
   end
 
   def announce_tie
