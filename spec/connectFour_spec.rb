@@ -77,4 +77,27 @@ describe ConnectFour do
     end
   end
 
+  describe '#update_current_player' do
+    subject(:game_current_player){described_class.new}
+    context 'when current_player is player1' do
+      before do
+        game_current_player.current_player = game_current_player.player1
+      end
+
+      it 'changes current_palyer to player2' do
+        expect(game_current_player.update_current_player).to eq(game_current_player.player2)
+      end
+    end
+
+    context 'when current_player is player2' do
+      before do
+        game_current_player.current_player = game_current_player.player2
+      end
+
+      it 'changes current_player to player1' do
+        expect(game_current_player.update_current_player).to eq(game_current_player.player1)
+     end
+    end
+  end
+
 end

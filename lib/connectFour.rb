@@ -37,7 +37,11 @@ class ConnectFour
   end
 
   def update_current_player
-
+    if self.current_player == self.player1
+      self.current_player = self.player2
+    else
+      self.current_player = self.player1
+    end
   end
 
   def print_board
