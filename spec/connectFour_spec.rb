@@ -45,4 +45,36 @@ describe ConnectFour do
     end
   end
 
+  describe '#moves_left?' do
+    subject(:game_moves_left){described_class.new}
+    context 'when moves are left' do
+      before do
+        game_moves_left.current_player.played_discs = 20  
+      end
+
+      it 'increments the played_discs count for current player' do
+        expect{game_moves_left.moves_left?}.to change{game_moves_left.current_player.played_discs}.by(1)
+        game_moves_left.moves_left?
+      end
+
+      it 'returns true' do
+        expect(game_moves_left.moves_left?).to be true
+      end
+    end
+
+    context 'when no more moves are left' do
+      before do
+        game_moves_left.current_player.played_discs = 21  
+        allow(game_moves_left).to receive(:announce_tie)
+        allow(game_moves_left).to receive(:end_game)
+      end
+      
+      it 'receives the methods #announce_tie and #end_game' do
+        expect(game_moves_left).to receive(:announce_tie)
+        expect(game_moves_left).to receive(:end_game)
+        game_moves_left.moves_left?
+      end
+    end
+  end
+
 end

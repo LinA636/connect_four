@@ -27,7 +27,13 @@ class ConnectFour
   end
 
   def moves_left?
-
+    if self.current_player.played_discs < 21
+      self.current_player.played_discs += 1
+      return true
+    else
+      announce_tie
+      end_game
+    end
   end
 
   def update_current_player
@@ -45,5 +51,13 @@ class ConnectFour
 
   def make_move
 
+  end
+
+  def announce_tie
+
+  end
+
+  def end_game
+    
   end
 end
