@@ -24,7 +24,7 @@ class ConnectFour
 
   def victory?
     victory_in_row?
-    #victory_in_column?
+    victory_in_column?
     #victory_in_diagonal?
   end
 
@@ -35,6 +35,17 @@ class ConnectFour
         announce_winner
         return true
       end
+    end 
+    false
+  end
+
+  def victory_in_column?
+    number_of_columns = self.field_matrix.column_size
+    for i in 0..number_of_columns-1
+        if self.field_matrix.column(i).each_cons(4).any?{|cons| cons.all?{|field| field.is_set && field.symbol == self.current_player.symbol}}
+          announce_winner
+          return true
+        end
     end 
     false
   end
