@@ -25,7 +25,7 @@ class ConnectFour
   def victory?
     victory_in_row?
     victory_in_column?
-    #victory_in_diagonal?
+    victory_in_diagonal?
   end
 
   def victory_in_row?
@@ -48,6 +48,11 @@ class ConnectFour
         end
     end 
     false
+  end
+
+
+  def victory_in_diagonal?
+    
   end
 
   def moves_left?

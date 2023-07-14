@@ -283,4 +283,18 @@ describe ConnectFour do
     end
   end
 
+  describe '#victory_in_diagonal?' do
+    context 'when there are 4 same symbols next to each other in a diagonal' do
+      xit 'announces winner and returns true' do
+        
+      end
+    end
+
+    context 'when there are not 4 same symbols next to each other in a diagonal' do
+      xit 'returns false' do
+        
+      end
+    end
+  end
+
 end
