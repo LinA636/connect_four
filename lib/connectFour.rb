@@ -77,6 +77,12 @@ class ConnectFour
     column.all?{|field| field.is_set == true}
   end
 
+  def drop_disc(column_index)
+    field = self.field_matrix.column(column_index).to_a.select{|field| field.is_set == false}.last
+    field.is_set = true
+    field.symbol = self.current_player.symbol
+  end
+
   def announce_tie
     puts "There are no more moves left. It's a tie!"
   end

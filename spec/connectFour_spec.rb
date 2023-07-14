@@ -185,5 +185,47 @@ describe ConnectFour do
     end
   end
 
+  describe '#drop_disc' do
+    subject(:game_drop_disc){described_class.new}
+    let(:column_index){0}
+    context 'when the column is empty' do    
+      it 'sets is_set of the lowest field to true and assigns current_players symbol to it' do
+        player = game_drop_disc.current_player
+        field = game_drop_disc.field_matrix.column(column_index).to_a.last
+             
+        game_drop_disc.drop_disc(column_index)
+        expect(field.is_set).to eq(true)
+        expect(field.symbol).to eq(player.symbol)
+      end
+    end
+
+    context 'when column has occupied and empty slots' do
+      before do
+        player = game_drop_disc.current_player
+        field = game_drop_disc.field_matrix.column(column_index).to_a.last
+    
+        col = game_drop_disc.field_matrix.column(0).to_a
+        col = col.each_with_index do |field, index|
+          if col.length < index 
+            field.is_set = true
+            field.symbol = player.symbol
+          else
+            field
+          end 
+        end
+      end
+
+      it 'sets is_set of the lowest empty field to true and assigns current_players symbol to it' do
+        column_index = 0
+        player = game_drop_disc.current_player
+        field = game_drop_disc.field_matrix.column(column_index).to_a.last
+        
+        game_drop_disc.drop_disc(column_index)
+        expect(field.is_set).to eq(true)
+        expect(field.symbol).to eq(player.symbol)
+      end
+    end
+  end
+
 
 end
