@@ -284,15 +284,28 @@ describe ConnectFour do
   end
 
   describe '#victory_in_diagonal?' do
+    subject(:game_diag){described_class.new}
     context 'when there are 4 same symbols next to each other in a diagonal' do
-      xit 'announces winner and returns true' do
+      before do
+        game_diag.field_matrix[5,0].symbol = game_diag.current_player.symbol 
+        game_diag.field_matrix[5,0].is_set = true
+        game_diag.field_matrix[4,1].symbol = game_diag.current_player.symbol 
+        game_diag.field_matrix[4,1].is_set = true
+        game_diag.field_matrix[3,2].symbol = game_diag.current_player.symbol 
+        game_diag.field_matrix[3,2].is_set = true
+        game_diag.field_matrix[2,3].symbol = game_diag.current_player.symbol 
+        game_diag.field_matrix[2,3].is_set = true
         
+        allow(game_diag).to receive(:announce_winner)
+      end
+      it 'announces winner and returns true' do
+        expect(game_diag.victory_in_diagonal?).to be true
       end
     end
 
     context 'when there are not 4 same symbols next to each other in a diagonal' do
-      xit 'returns false' do
-        
+      it 'returns false' do
+        expect(game_diag.victory_in_diagonal?).to be false
       end
     end
   end

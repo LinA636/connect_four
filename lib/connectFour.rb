@@ -52,7 +52,27 @@ class ConnectFour
 
 
   def victory_in_diagonal?
-    
+    number_of_columns = self.field_matrix.column_size
+    number_of_rows = self.field_matrix.row_size
+    # check diagonal from left to right
+    for i in 0..number_of_columns-4
+      for j in i..number_of_rows-4
+        if (0..3).all?{|k| self.field_matrix[j+k, i+k].is_set && self.field_matrix[j+k, i+k].symbol == self.current_player.symbol}
+          announce_winner
+          return true
+        end
+      end
+    end
+    # check diagonal from right to left
+    for i in 0..number_of_columns-4
+      for j in i..number_of_rows-4
+        if (0..3).all?{|k| self.field_matrix[j+k, i+(3-k)].is_set && self.field_matrix[j+k, i+(3-k)].symbol == self.current_player.symbol}
+          announce_winner
+          return true
+        end
+      end
+    end
+    false
   end
 
   def moves_left?
