@@ -73,7 +73,8 @@ class ConnectFour
   end
 
   def column_full?(column_index)
-
+    column = self.field_matrix.column(column_index).to_a
+    column.all?{|field| field.is_set == true}
   end
 
   def announce_tie

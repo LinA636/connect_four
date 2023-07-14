@@ -164,4 +164,26 @@ describe ConnectFour do
     end
   end
 
+  describe '#column_full?' do
+    subject(:game_column_full) {described_class.new}
+
+    context 'when column is full' do
+      before do
+        game_column_full.field_matrix.column(0).to_a.each{|field| field.is_set = true}
+      end
+
+      it 'returns true' do
+        expect(game_column_full.column_full?(0)).to be true
+      end
+    end
+
+    context 'when column is not full' do
+      it 'returns false' do
+        column_index = 0
+        expect(game_column_full.column_full?(0)).to be false
+      end
+    end
+  end
+
+
 end
