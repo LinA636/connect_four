@@ -23,7 +23,20 @@ class ConnectFour
   end
 
   def victory?
+    victory_in_row?
+    #victory_in_column?
+    #victory_in_diagonal?
+  end
 
+  def victory_in_row?
+    number_of_rows = self.field_matrix.row_size
+    for i in 0..number_of_rows-1
+      if self.field_matrix.row(i).each_cons(4).any?{|cons| cons.all?{|field| field.is_set && field.symbol == self.current_player.symbol}}
+        announce_winner
+        return true
+      end
+    end 
+    false
   end
 
   def moves_left?
@@ -85,6 +98,10 @@ class ConnectFour
 
   def announce_tie
     puts "There are no more moves left. It's a tie!"
+  end
+
+  def announce_winner
+
   end
 
 end

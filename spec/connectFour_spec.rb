@@ -227,5 +227,33 @@ describe ConnectFour do
     end
   end
 
+  describe '#victory_in_row?' do
+    subject(:game_row){described_class.new}
+    context 'when there are 4 same symbols next to each other in a row' do
+      before do
+        game_row.field_matrix[5,0].symbol = game_row.current_player.symbol 
+        game_row.field_matrix[5,0].is_set = true
+        game_row.field_matrix[5,1].symbol = game_row.current_player.symbol 
+        game_row.field_matrix[5,1].is_set = true
+        game_row.field_matrix[5,2].symbol = game_row.current_player.symbol 
+        game_row.field_matrix[5,2].is_set = true
+        game_row.field_matrix[5,3].symbol = game_row.current_player.symbol 
+        game_row.field_matrix[5,3].is_set = true
+        
+        allow(game_row).to receive(:announce_winner)
+      end
+
+      it 'announces winner and returns true' do
+        expect(game_row.victory_in_row?).to be true
+      end
+    end
+
+    context 'when there are not 4 same symbols next to each other in a row' do
+
+      it 'returns false' do
+        expect(game_row.victory_in_row?).to be false
+      end
+    end    
+  end
 
 end
