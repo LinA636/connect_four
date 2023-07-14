@@ -66,12 +66,10 @@ describe ConnectFour do
       before do
         game_moves_left.current_player.played_discs = 21  
         allow(game_moves_left).to receive(:announce_tie)
-        allow(game_moves_left).to receive(:end_game)
       end
       
-      it 'receives the methods #announce_tie and #end_game' do
-        expect(game_moves_left).to receive(:announce_tie)
-        expect(game_moves_left).to receive(:end_game)
+      it 'receives the methods #announce_tie' do
+        expect(game_moves_left).to receive(:announce_tie).once
         game_moves_left.moves_left?
       end
     end

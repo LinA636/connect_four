@@ -59,10 +59,10 @@ class ConnectFour
   end
 
   def announce_tie
-
+    puts "There are no more moves left. It's a tie!"
   end
 
   def end_game
-    
+    #exit
   end
 end
