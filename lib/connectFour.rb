@@ -35,7 +35,12 @@ class ConnectFour
   end
 
   def print_board
-
+    puts "\n 1 2 3 4 5 6 7 "
+    puts "+-+-+-+-+-+-+-+"
+    self.field_matrix.row_vectors.each do |row|
+      puts "|#{row.to_a.join('|')}|"
+      puts "+-+-+-+-+-+-+-+"
+    end
   end
 
   def make_move
