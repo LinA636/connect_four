@@ -19,10 +19,11 @@ class ConnectFour
   def start_game
     print_board
     make_move
+    print_board
     while !victory? && moves_left?
       update_current_player
-      print_board
       make_move
+      print_board
     end
   end
 
@@ -99,6 +100,7 @@ class ConnectFour
       puts "|#{row.to_a.join('|')}|"
       puts "+-+-+-+-+-+-+-+"
     end
+    puts " 1 2 3 4 5 6 7 "
   end
 
   def make_move
