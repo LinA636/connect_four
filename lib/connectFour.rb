@@ -6,26 +6,25 @@ require "matrix"
 class ConnectFour
   # ToDos
   # does not stop game after victory
-  # does not have different colors for different players
 
   attr_accessor :field_matrix, :current_player, :player1, :player2
 
   def initialize
     @field_matrix = Matrix.build(6,7){Field.new}
-    @player1 = Player.new('red')
-    @player2 = Player.new('black')
+    @player1 = Player.new("Player1", :red)
+    @player2 = Player.new("Player2", :blue)
     @current_player = self.player1
   end
 
   def start_game
+    print_board
+    make_move
     while !victory? && moves_left?
       update_current_player
       print_board
       make_move
     end
   end
-
-  private
 
   def victory?
     victory_in_row?
@@ -49,7 +48,6 @@ class ConnectFour
     for i in 0..number_of_columns-1
         if self.field_matrix.column(i).each_cons(4).any?{|cons| cons.all?{|field| field.is_set && field.symbol == self.current_player.symbol}}
           announce_winner
-          return true
         end
     end 
     false
@@ -63,7 +61,6 @@ class ConnectFour
       for j in i..number_of_rows-4
         if (0..3).all?{|k| self.field_matrix[j+k, i+k].is_set && self.field_matrix[j+k, i+k].symbol == self.current_player.symbol}
           announce_winner
-          return true
         end
       end
     end
@@ -72,7 +69,6 @@ class ConnectFour
       for j in i..number_of_rows-4
         if (0..3).all?{|k| self.field_matrix[j+k, i+(3-k)].is_set && self.field_matrix[j+k, i+(3-k)].symbol == self.current_player.symbol}
           announce_winner
-          return true
         end
       end
     end
@@ -85,7 +81,6 @@ class ConnectFour
       return true
     else
       announce_tie
-      return false
     end
   end
 
@@ -112,7 +107,7 @@ class ConnectFour
   end
 
   def choose_column
-    puts 'Choose a column: '
+    puts "#{current_player.name} choose a column: "
     column_index = gets.chomp.to_i
     column_index -= 1
     if column_exists?(column_index) && !column_full?(column_index)
@@ -139,10 +134,12 @@ class ConnectFour
 
   def announce_tie
     puts "There are no more moves left. It's a tie!"
+    exit
   end
 
   def announce_winner
-    puts "Congratulation! The player with symbol #{current_player.symbol} wins."
+    puts "Congratulation! #{current_player.name} wins."
+    exit
   end
 
 end

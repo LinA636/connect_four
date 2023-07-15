@@ -1,8 +1,11 @@
-class Player
-  attr_accessor :symbol, :played_discs
+# frozen_string_literal: true
 
-  def initialize(color_name)
+class Player
+  attr_accessor :symbol, :played_discs, :name
+
+  def initialize(name, color_name)
     @symbol = "\u{23FA}".colorize(color_name)
     @played_discs = 0 
+    @name = name
   end
 end
